@@ -1,3 +1,4 @@
+require("dotenv/config")
 require("express-async-errors")
 const AppError = require("./utils/AppError")
 const express = require("express")
@@ -16,7 +17,7 @@ app.use(routes)
 
 database()
 
-const PORT = 3334
+const PORT = process.env.PORT 
 
 app.use((error, req, res, next) => {
   if (error instanceof AppError) {
