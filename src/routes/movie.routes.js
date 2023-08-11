@@ -1,12 +1,15 @@
 const { Router } = require("express")
 const MovieControllers = require("../controllers/MovieControllers")
+const ensureAuthenticated = require("../middlewares/ensureAuthenticated")
 
 const movieRouter = Router()
 
 const movieControllers = new MovieControllers()
 
+movieRouter.use(ensureAuthenticated)
+
 movieRouter.get("/", movieControllers.index)
-movieRouter.post("/:user_id", movieControllers.create)
+movieRouter.post("/", movieControllers.create)
 movieRouter.get("/:id", movieControllers.show)
 movieRouter.delete("/:id", movieControllers.delete)
 
